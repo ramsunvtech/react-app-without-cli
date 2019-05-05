@@ -86,6 +86,10 @@ add below content, save and exit the file
 ```javascript
 npm i -D react-hot-loader --registry=https://registry.npmjs.com/
 ```
+> Start the React app
+```javascript
+npm start
+```
 > Referrences
 * https://github.com/rwieruch/minimal-react-webpack-babel-setup
 * https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
