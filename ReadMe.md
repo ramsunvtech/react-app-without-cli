@@ -5,31 +5,13 @@
 npm init -y
 ```
 
-> Modules and React
+> Modules and React, Dev Modules and Prop Types, Webpack, CSS, HTML & Babel
 ```javascript
 npm install -S react react-dom --registry=https://registry.npmjs.com/
-```
-
-> Dev Modules and Prop Types
-```javascript
 npm i -D  prop-types --registry=https://registry.npmjs.com/
-```
-
-> Webpack
-```javascript
 npm install -D webpack webpack-cli webpack-dev-server react-hot-loader --registry=https://registry.npmjs.com/
-```
-> CSS
-```javascript
 npm install -D css-loader style-loader --registry=https://registry.npmjs.com/
-```
-> HTML
-```javascript
 npm install -D html-webpack-plugin --registry=https://registry.npmjs.com/
-```
-
-> Babel
-```javascsript
 npm install -D @babel/core @babel/preset-env @babel/preset-react babel-loader --registry=https://registry.npmjs.com/
 ```
 > Babel RC - create .babelrc file in the node app directory
