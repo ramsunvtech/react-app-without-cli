@@ -1,47 +1,69 @@
 # Setting App with React 16.x, Webpack 4.0  (2019)
 
 > Init the node app
-```javascript
+```shell
 npm init -y
 ```
 
-> Modules and React, Dev Modules and Prop Types, Webpack, CSS, HTML & Babel
+> Add React and ReactDOM
 ```javascript
 npm install -S react react-dom --registry=https://registry.npmjs.com/
 npm i -D  prop-types --registry=https://registry.npmjs.com/
-npm install -D webpack webpack-cli webpack-dev-server react-hot-loader --registry=https://registry.npmjs.com/
+```
+> Add Babel.
+```shell
+npm install -D @babel/core @babel/preset-env @babel/preset-react --registry=https://registry.npmjs.com/
+```
+
+> Add Webpack, Loaders.
+```shell
+npm install -D webpack webpack-cli webpack-dev-server --registry=https://registry.npmjs.com/
 npm install -D css-loader style-loader --registry=https://registry.npmjs.com/
 npm install -D html-webpack-plugin --registry=https://registry.npmjs.com/
-npm install -D @babel/core @babel/preset-env @babel/preset-react babel-loader --registry=https://registry.npmjs.com/
+npm install -D babel-loader --registry=https://registry.npmjs.com/
 ```
-> Babel RC - create .babelrc file in the node app directory
+
+> Add Hot Loader.
+```shell
+npm install -D react-hot-loader --registry=https://registry.npmjs.com/
+```
+
+> Babel RunTime Configuration - create .babelrc.
 ```shell
 vi .babelrc
 ```
-add the below content, save and exit the file
+
+> Add Content in `.babelrc`
 ```
 {
   "presets": ["@babel/preset-env", "@babel/preset-react"]
 }
 ```
 
-> Add NPM Script to the package.json created by npm init in the first step.
+> Edit `package.json`.
 ```shell
 vi package.json
 ```
-add below snipett and make sure the "scripts" object in json looks like below
+
+> `package.json` Content in Scripts.
 ```javascript
 "scripts": {
   "start": "webpack-dev-server --open --mode development",
   "build": "webpack --mode production"
 },
 ```
-> Add HTML - index.html
+> Add `public` and `src` directory.
 ```shell
+mkdir public src
+```
+
+> Create HTML - index.html
+```shell
+cd public/
 vi index.html
 ```
-add below content, save and exit the file
 
+> `index.html` Content.
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -64,14 +86,95 @@ add below content, save and exit the file
 </html>
 ```
 
-> Hot Reloader
-```javascript
-npm i -D react-hot-loader --registry=https://registry.npmjs.com/
+> Create App Component.
+```shell
+cd src/
+vi App.js
 ```
+
+> `App.js` Script.
+```
+import React from 'react';
+
+function App () {
+  return (
+    <h1>
+      Welcome to React App without CLI.
+    </h1>
+  );
+}
+
+export default App;
+```
+
+> Create Index File
+```shell
+cd src/
+vi index.js
+```
+
+> `index.js` Script.
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import App from './App';
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('app-without-cli')
+); 
+```
+
+> Create Webpack Config.
+```shell
+vi webpack.config.js
+```
+
+> `webpack.config.js` Script.
+```
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/index.js',
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['*', '.js']
+  },
+  output: {
+    path: __dirname + '/dist',
+    publicPath: '/',
+    filename: 'app-bundle.js'
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: './public/index.html',
+    }),
+  ],
+  devServer: {
+    contentBase: './dist',
+    hot: true
+  }
+};
+```
+
 > Start the React app
-```javascript
+```shell
 npm start
 ```
+
 > Referrences
 * https://github.com/rwieruch/minimal-react-webpack-babel-setup
 * https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
@@ -81,7 +184,7 @@ npm start
 * https://medium.com/@pioul/modular-css-with-react-61638ae9ea3e
 * https://medium.com/@rossbulat/formik-for-react-introduction-to-form-management-done-right-971889b40f9f
 
-> Tags
+> Comming Soon...
 * ES Lint
 * Sonar Lint
 * Gzip Compression
